@@ -1,0 +1,13 @@
+mistral_inference
+transformers
+torch
+datasets
+bitsandbytes
+scipy
+sentencepiece
+accelerate
+xformers
+einops
+safetensors
+triton
+huggingface_hub  # Add this line to include the huggingface_hub library

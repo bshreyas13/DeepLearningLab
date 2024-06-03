@@ -16,6 +16,7 @@ Roadmap:
 5. Generate text based on the given chat.
 6. Test with deepseek : https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct
 7. Find a to use the quamtized coderstral/codellamma models
+8. Post issue for code-gemma
 """
 
 from transformers import BitsAndBytesConfig

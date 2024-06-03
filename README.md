@@ -6,11 +6,13 @@ Repo for a general framework to test multipl;e conde generation LLMs.
 * Codestral
 
 ## Quick Start From Docker Image
+
 * Pull docker image from registry 
 ```bash
 docker pull docker pull huggingface/transformers-pytorch-gpu
-
-docker run -it --rm -p 9999:8888 -v $(pwd):/opt/app -v [path to data]:/opt/app/data --shm-size=20G docker pull huggingface/transformers-pytorch-gpu
+```
+```bash
+docker run -e HF_TOKEN=XXXXX -it --rm -p 9999:8888 --user=12764:10001 -v $(pwd):/opt/app -v /vtti:/vtti --gpus all --shm-size=60G hfdocker:latest
 ```
 
 ## Usage

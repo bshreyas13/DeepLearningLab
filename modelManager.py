@@ -1,3 +1,23 @@
+# -*- coding: utf-8 -*-
+"""
+Date: 06/02/2024
+Author: Shreyas Bhat, Sarang Joshi
+Maintainer : Shreyas Bhat, Sarang Joshi
+E-mail:sbhat@vtti.vt.edu
+
+Description:
+This file contains the ModelManager class which is used to manage the loading and inference of a model.
+
+Roadmap:
+1. Load the tokenizer for the model.
+2. Load the model from the local model path.
+3. Infer the device map for the model.
+4. Dispatch the model to the specified devices in the device map.
+5. Generate text based on the given chat.
+6. Test with deepseek : https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct
+7. Find a to use the quamtized coderstral/codellamma models
+"""
+
 from transformers import BitsAndBytesConfig
 from safetensors import safe_open
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, GemmaTokenizer

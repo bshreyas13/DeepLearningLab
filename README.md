@@ -52,6 +52,10 @@ ssh -N -f -L 9999:localhost:9999 host@server.xyz
 
 ## Usage
 
+Example:
+```bash
+python modelManager.py --quantize
+```
 ## Roadmap
 - Add base inference wrapper
 - Add support for training/finetuning

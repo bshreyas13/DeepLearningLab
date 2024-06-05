@@ -8,16 +8,6 @@ E-mail:sbhat@vtti.vt.edu
 Description:
 This file contains the ModelManager class which is used to manage the loading and inference of a model.
 
-Roadmap:
-1. Load the tokenizer for the model.
-2. Load the model from the local model path.
-3. Infer the device map for the model.
-4. Dispatch the model to the specified devices in the device map.
-5. Generate text based on the given chat.
-6. Test with deepseek : https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct
-7. Find a to use the quamtized coderstral/codellamma models
-8. Post issue for code-gemma
-9. Test with code-gemma : https://huggingface.co/google/codegemma-1.1-7b-it
 """
 
 from transformers import BitsAndBytesConfig
@@ -97,7 +87,7 @@ class ModelManager:
         dtype (torch.dtype, optional): The data type of the model. Defaults to torch.float16.
         quantization_config (dict, optional): The quantization configuration for the model. Defaults to None.
     """
-    def __init__(self, model_path: str, dtype: torch.dtype = torch.float16, quantization_config: dict = None) -> None:
+    def __init__(self, model_path: str, dtype: torch.dtype = torch.float16,  quantization_config: dict = None) -> None:
         self.model_path: str = model_path
         self.dtype: torch.dtype = dtype
         self.quantization_config: dict = quantization_config
@@ -126,7 +116,7 @@ class ModelManager:
         """
         self.loader.model = dispatch_model(self.loader.model, device_map=self.device_map)
 
-    def generate_text(self, chat: str) -> str:
+    def generate_text(self, chat: list) -> str:
         """
         Generates text based on the given chat.
 
@@ -165,7 +155,7 @@ if __name__ == "__main__":
             chat: list = [
                 {"role": f"{role}", "content": f"{chat_input}"},
             ]
-            outputs , response_str = manager.generate_text(chat)
+            outputs , response_str = manager.generate_text(chat=chat)
             print(f"Response: {response_str}")
             args['logger'].info(f"Response: {response_str}")
         except KeyboardInterrupt:

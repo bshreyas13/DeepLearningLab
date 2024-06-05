@@ -57,9 +57,20 @@ Example:
 python modelManager.py --quantize
 ```
 ## Roadmap
-- Add base inference wrapper
+- Add base inference wrapper    
+    1. Load the tokenizer for the model.
+    2. Load the model from the local model path.
+    3. Infer the device map for the model.
+    4. Dispatch the model to the specified devices in the device map.
+    5. Generate text based on the given chat.
+    6. Test with deepseek : https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct
+    7. Find a to use the quamtized coderstral/codellamma models
+    8. Post issue for code-gemma
+    9. Test with code-gemma : https://huggingface.co/google/codegemma-1.1-7b-it
 - Add support for training/finetuning
-- Add support for models openAI, gemini eventually.
+- Add support for models openAI, gemini eventually. 
+- Use langchain to build chat bot
+- Build similar framework for Vision language models
 
 ## Authors and acknowledgment
 

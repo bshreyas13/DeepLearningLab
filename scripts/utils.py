@@ -13,6 +13,8 @@ from datetime import datetime
 import pytz
 from typing import Tuple
 import subprocess
+from argparse import ArgumentParser
+import json
 
 def is_nested_directory(path: str) -> bool:
         """
@@ -97,3 +99,63 @@ def init_logger(log_path: str) -> logging.Logger:
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
         return logger
+
+def parse_args():
+    """
+    Parse command line arguments for 3D detection.
+
+    Returns:
+        init_args (dict): Dictionary containing the initial arguments.
+        call_args (dict): Dictionary containing the parsed command line arguments.
+        added_args (dict): Dictionary containing additional arguments.
+    """
+    parser = ArgumentParser()
+    
+    # Load arguments from JSON file
+    with open('args.json') as f:
+        args = json.load(f)
+    # Add arguments to parser
+    print("START: Adding arguments to parser")
+    for arg in args:
+        print(f"{arg['name']} , {arg['options']}")
+        if 'type' in arg['options']:
+            arg['options']['type'] = get_type_constructor(arg['options']['type'])
+        parser.add_argument(arg['name'], **arg['options'])
+    
+    call_args = vars(parser.parse_args())
+    logger = init_logger(log_path=call_args['log_path'])
+    logger.info(f'Input command line arguments: {call_args}')
+    call_args['logger'] = logger
+
+    return call_args
+
+def get_type_constructor(input_type: str):
+    # List of known type-casting functions
+    supported_type_constructors = {
+                "int": int,
+                "float": float,
+                "str": str,
+                "bool": bool,
+                "complex": complex,
+                "bytes": bytes,
+                "bytearray": bytearray,
+                "list": list,
+                "tuple": tuple,
+                "set": set,
+                "dict": dict,
+                "frozenset": frozenset
+                }
+    # Get all type constructors from builtins and check about supported type constructors
+    #all_builtins = [name for name in dir(builtins) if name[0].islower() and callable(getattr(builtins, name))]
+    if input_type in list(supported_type_constructors.keys()):
+        return supported_type_constructors[input_type]
+    else:
+        print(f"{input_type} is not a supported type constructor. Supported type constructors are: {list(supported_type_constructors.keys())}")
+        return None
+    
+def assert_with_log(condition, message, logger):
+    try:
+        assert condition, message
+    except AssertionError as e:
+        logger.error(f"Assertion failed: {message}")
+        raise AssertionError(message) from None  # Optionally re-raise the AssertionError to halt the program

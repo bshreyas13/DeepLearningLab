@@ -29,16 +29,16 @@ docker build -f Dockerfile -t hfcodegen .
 ```
 * Step 4: Run container from image and mount data volumes.
 ```bash
-docker run -it --rm -p 9999:8888 -v $(pwd):/opt/app -v [path to data]:/opt/app/data --shm-size=20G hfcodegen
+docker run -e HF_TOKEN= 'you hugging face acccess token' -it --rm -p 9999:8888 -v $(pwd):/opt/app -v [path to data]:/opt/app/data --shm-size=20G hfcodegen
 ```
 For example: 
 ```bash
-docker run -it --rm -p 9999:8888 --user=12764:10001 -v $(pwd):/opt/app -v /vtti:/vtti --gpus all --shm-size=20G hfcodegen
+docker run -e HF_TOKEN= 'you hugging face acccess token' -it --rm -p 9999:8888 --user=12764:10001 -v $(pwd):/opt/app -v /vtti:/vtti --gpus all --shm-size=20G hfcodegen
 ```
 * To run in dettached mode use the `-d` flag. This will ensure the conatiner continues to run irrespective of terminal status
 For example: 
 ```bash
-docker run -it --rm -p 9999:8888 --user=12764:10001 -v $(pwd):/opt/app -v /vtti:/vtti --gpus all --shm-size=20G hfcodegen
+docker run -d -e HF_TOKEN=XXXXX -it --rm -p 9999:8888 --user=12764:10001 -v $(pwd):/opt/app -v /vtti:/vtti --gpus all --shm-size=60G hfdocker:latest hfcodegen
 docker ps
 docker attach <name of your docker container from ps command>
 ```

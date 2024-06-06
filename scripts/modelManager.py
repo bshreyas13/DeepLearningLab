@@ -76,6 +76,29 @@ class DeepSeekLoader(ModelLoader):
                 self.model_path, torch_dtype=self.dtype,
                 trust_remote_code=True,
                 use_safetensors=True)
+
+class CodestralLoader(ModelLoader):
+    def __init__(self, model_path: str, dtype: torch.dtype, quantization_config: dict):
+        self.model_path = model_path
+        self.dtype = dtype
+        self.quantization_config = quantization_config
+
+    def load_tokenizer(self) -> None:
+        self.tokenizer = AutoTokenizer.from_pretrained("mistralai/codestral-22B-v0.1", trust_remote_code=True)
+
+    def load_model(self) -> None:
+        torch.cuda.empty_cache()
+        if self.quantization_config is not None:
+            with torch.no_grad():
+                self.model = AutoModelForCausalLM.from_pretrained(
+                    self.model_path, torch_dtype=self.dtype,
+                    trust_remote_code=True,
+                    use_safetensors=True, quantization_config=self.quantization_config)
+        else:
+            self.model = AutoModelForCausalLM.from_pretrained(
+                self.model_path, torch_dtype=self.dtype,
+                trust_remote_code=True,
+                use_safetensors=True)
             
 # Updated ModelManager class
 class ModelManager:
@@ -98,6 +121,8 @@ class ModelManager:
             self.loader = CodeGemmaLoader(self.model_path, self.dtype, self.quantization_config)
         elif model == "deepseek-coder-6.7b-instruct":
             self.loader = DeepSeekLoader(self.model_path, self.dtype, self.quantization_config)
+        elif model == "Codestral-22B-v0.1":
+            self.loader = CodestralLoader(self.model_path, self.dtype, self.quantization_config)
         else:
             raise ValueError(f"Unsupported model, got: {model}. Choose between {['codegemma-1.1-7b-it', 'deepseek-coder-6.7b-instruct']}")
         

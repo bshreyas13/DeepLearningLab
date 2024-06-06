@@ -2,7 +2,7 @@
     {
         "name": "--model_path",
         "options": {
-            "default": "/vtti/projects06/451857/Data/Dump/ShreyasTest/deepseek-coder-6.7b-instruct",
+            "default": "/vtti/projects06/451857/Data/Dump/ShreyasTest/codegemma-1.1-7b-it",
             "help": "Point model path , either local clone or remote path of higging face repo"
         }
     },

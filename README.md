@@ -3,7 +3,10 @@ Repo for a general framework to test multipl;e conde generation LLMs.
 
 ## Supported Models
 
-* Codestral
+* DeepSeek 
+* code-gemma : start issue tracker for tokenizer error 
+* Codestral : Test Pending
+
 
 ## Quick Start From Docker Image
 
@@ -67,6 +70,7 @@ python modelManager.py --quantize
     7. Find a to use the quamtized coderstral/codellamma models
     8. Post issue for code-gemma
     9. Test with code-gemma : https://huggingface.co/google/codegemma-1.1-7b-it
+    10. codestral hf space: https://huggingface.co/spaces/poscye/code
 - Add support for training/finetuning
 - Add support for models openAI, gemini eventually. 
 - Use langchain to build chat bot

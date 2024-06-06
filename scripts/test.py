@@ -130,9 +130,8 @@ class ModelManager:
         
         self.loader.load_tokenizer()
         self.loader.load_model()
-        ## TODO : Figure out ditributed inference
-        # self.infer_device_map()
-        # self.dispatch_model()
+        self.infer_device_map()
+        self.dispatch_model()
 
     def infer_device_map(self) -> None:
         """

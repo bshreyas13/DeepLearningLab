@@ -59,6 +59,8 @@ Example:
 ```bash
 python modelManager.py --quantize
 ```
+**NOTE** : currently requires `--quantize` flag.
+
 ## Roadmap
 - Add base inference wrapper    
     1. Load the tokenizer for the model.
@@ -72,6 +74,7 @@ python modelManager.py --quantize
     9. Test with code-gemma : https://huggingface.co/google/codegemma-1.1-7b-it
     10. codestral hf space: https://huggingface.co/spaces/poscye/code
     11. check why not distributing across GPUS
+    12. Since ditribution fails unable to infer with out `--quantize`
 - Add support for training/finetuning
 - Add support for models openAI, gemini eventually. 
 - Use langchain to build chat bot

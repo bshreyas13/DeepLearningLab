@@ -10,4 +10,6 @@ xformers
 einops
 safetensors
 triton
-huggingface_hub  # Add this line to include the huggingface_hub library
+huggingface_hub  
+langchain
+langchain_community

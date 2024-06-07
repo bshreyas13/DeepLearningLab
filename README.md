@@ -1,10 +1,11 @@
-# codeGen
-Repo for a general framework to test multipl;e conde generation LLMs.
+# LLM Lab
+The project contains a framework for easily testing opensource-LLMs from hugging face. 
+You will need to clone the HF repo for any model of interest currently. 
 
 ## Supported Models
 
 * DeepSeek 
-* code-gemma : works with role set to user
+* code-gemma 
 * Codestral : Test Pending
 
 
@@ -26,9 +27,9 @@ git clone git@github.com:bshreyas13/codeGen.git
 ```bash
 cd codeGen
 ```
-* Step 3: Build the docker image using Dockerfile. **Note**: use the Dockerfile in the home directory of the repo since it has more updated instruction than the one in mmdetection/docker.
+* Step 3: Build the docker image using Dockerfile. 
 ```bash
-docker build -f Dockerfile -t hfcodegen .
+docker build -e HF_TOKEN=XXX -f Dockerfile -t hfcodegen .
 ```
 * Step 4: Run container from image and mount data volumes.
 ```bash
@@ -57,7 +58,7 @@ ssh -N -f -L 9999:localhost:9999 host@server.xyz
 
 Example:
 ```bash
-python modelManager.py --quantize
+python start_chat.py --model_path "/vtti/projects06/451857/Data/Dump/ShreyasTest/codegemma-1.1-7b-it" --quantize --log_path "./LOGS"
 ```
 **NOTE** : currently requires `--quantize` flag.
 
@@ -78,7 +79,8 @@ python modelManager.py --quantize
 - Add support for training/finetuning
 - Add support for models openAI, gemini eventually. 
 - Use langchain to build chat bot
-- Build similar framework for Vision language models
+- Build/Add similar framework for Vision language models
+- Automate repo cloning
 
 ## Authors and acknowledgment
 
@@ -109,6 +111,10 @@ For open source projects, say how it is licensed.
 
 ## Project status
 * Docker built 
+* tested models 
+* intergrated history/context based chat using langchain
+* chatbot works for coding with 2 models
+
 
 
 # Citation

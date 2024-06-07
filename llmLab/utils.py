@@ -3,7 +3,7 @@
 Date:3/15/2024  
 Author: Shreyas Bhat
 Maintainer : Shreyas Bhat
-E-mail:sbhat@vtti.vt.edu
+E-mail:shreyasbhat13@gmail.com
 """
 import os
 import subprocess as sp
@@ -12,7 +12,6 @@ import logging
 from datetime import datetime  
 import pytz
 from typing import Tuple
-import subprocess
 from argparse import ArgumentParser
 import json
 
@@ -112,7 +111,7 @@ def parse_args():
     parser = ArgumentParser()
     
     # Load arguments from JSON file
-    with open('args.json') as f:
+    with open('llmLab/args.json') as f:
         args = json.load(f)
     # Add arguments to parser
     print("START: Adding arguments to parser")
@@ -125,6 +124,7 @@ def parse_args():
     call_args = vars(parser.parse_args())
     logger = init_logger(log_path=call_args['log_path'])
     logger.info(f'Input command line arguments: {call_args}')
+    print(f'Input command line arguments: {call_args}')
     call_args['logger'] = logger
 
     return call_args

@@ -1,5 +1,6 @@
-# LLM Lab
-The project contains a framework for easily testing opensource-LLMs from hugging face. 
+# Deep Learning Lab
+The project contains a framework for easily testing opensource-deep learning models from hugging face.
+Currenlty only supports inference ing pretrained weights or incontext-learning. Finetuning will be added eventually.  
 You will need to clone the HF repo for any model of interest currently. 
 
 ## Supported Models

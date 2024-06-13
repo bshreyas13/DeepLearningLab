@@ -14,6 +14,7 @@ import pytz
 from typing import Tuple
 from argparse import ArgumentParser
 import json
+import re
 
 def is_nested_directory(path: str) -> bool:
         """
@@ -159,3 +160,21 @@ def assert_with_log(condition, message, logger):
     except AssertionError as e:
         logger.error(f"Assertion failed: {message}")
         raise AssertionError(message) from None  # Optionally re-raise the AssertionError to halt the program
+
+def parse_input(input_str: str):
+    # Define regular expression patterns for prompt and image
+    prompt_pattern = r'prompt:([^,]+)'
+    image_pattern = r'image:([^,]+)'
+
+    # Find all matches for prompt and image
+    prompt_matches = re.findall(prompt_pattern, input_str)
+    image_matches = re.findall(image_pattern, input_str)
+
+    # Get the last matches
+    last_prompt = prompt_matches[-1].strip() if prompt_matches else None
+    last_image = image_matches[-1].strip() if image_matches else None
+    last_prompt = last_prompt.strip('user:')
+    last_image = last_image.strip('assistant:')
+    last_image = last_image.strip()
+    print(last_prompt, last_image)
+    return last_prompt, last_image

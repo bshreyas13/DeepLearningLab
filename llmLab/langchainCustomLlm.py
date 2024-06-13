@@ -8,7 +8,7 @@ Note: This code assumes the presence of the langchain.llms.base, llmLab.modelMan
 
 """
 
-from typing import Optional, List
+from typing import Optional, List, Dict
 from langchain.llms.base import LLM
 from llmLab.modelManager import ModelManager
 from langchain.prompts import PromptTemplate
@@ -40,8 +40,8 @@ class CustomHuggingFaceLLM(LLM):
             str: The type of the LLM.
         """
         return "custom_huggingface"
-
-    def _call(self, prompt: str, stop: Optional[List[str]] = None) -> str:
+    
+    def _call(self, input: str,  stop: Optional[List[str]] = None) -> str:
         """
         Generates a response for the given prompt.
 
@@ -52,8 +52,8 @@ class CustomHuggingFaceLLM(LLM):
         Returns:
             str: The generated response.
         """
-        chat = [{"role": "user", "content": prompt}]
-        response = self.model_manager.generate_text(chat)
+        chat = [{"role": "user", "content": input}]
+        response = self.model_manager.loader.generate_text(chat)
         return response
 
     class Config:

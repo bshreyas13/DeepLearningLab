@@ -8,12 +8,13 @@ E-mail:shreyasbhat13@gmail.com
 Description:
 This file contains the ModelManager class which is used to manage the loading and inference of a model.
 
+TODO: Figure out parllelism to run 32 bit models on 16GB GPU
 """
 
 
 from accelerate import infer_auto_device_map, dispatch_model
 import torch
-from llmLab.loaders import ModelLoader, CodeGemmaLoader, DeepSeekLoader, CodestralLoader
+from llmLab.loaders import *
 import os
 import logging
 
@@ -39,10 +40,14 @@ class ModelManager:
         model: str = os.path.basename(self.model_path)
         if model == "codegemma-1.1-7b-it":
             self.loader = CodeGemmaLoader(self.model_path, self.dtype, self.quantization_config)
+        if model == "Meta-Llama-3-8B-Instruct":
+            self.loader = Llama3Loader(self.model_path, self.dtype, self.quantization_config)
         elif model == "deepseek-coder-6.7b-instruct":
             self.loader = DeepSeekLoader(self.model_path, self.dtype, self.quantization_config)
         elif model == "Codestral-22B-v0.1":
             self.loader = CodestralLoader(self.model_path, self.dtype, self.quantization_config)
+        elif model == "paligemma-3b-mix-448":
+            self.loader = PaliGemmaLoader(self.model_path, self.dtype, self.quantization_config)
         else:
             raise ValueError(f"Unsupported model, got: {model}. Choose between {['codegemma-1.1-7b-it', 'deepseek-coder-6.7b-instruct', 'Codestral-22B-v0.1']}")
         self.logger.info(f"Loading tokenizer and model for model: {model}")
@@ -65,21 +70,5 @@ class ModelManager:
         Dispatches the model to the specified devices in the device map.
         """
         self.loader.model = dispatch_model(self.loader.model, device_map=self.device_map)
-
-    def generate_text(self, chat: list) -> str:
-        """
-        Generates text based on the given chat.
-
-        Args:
-            chat (list): The chat input.
-
-        Returns:
-            str: The generated text.
-        """
-        inputs = self.loader.tokenizer.apply_chat_template(chat, add_generation_prompt=True, return_tensors="pt").to(self.loader.model.device)
-        outputs = self.loader.model.generate(inputs, max_new_tokens=512, do_sample=False, top_k=50, top_p=0.95, num_return_sequences=1, eos_token_id=self.loader.tokenizer.eos_token_id)
-        response_string = self.loader.tokenizer.decode(outputs[0][len(inputs[0]):], skip_special_tokens=True)
-        return response_string
-
 
 

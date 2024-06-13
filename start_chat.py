@@ -5,12 +5,15 @@ from llmLab.langchainCustomLlm import create_chain
 import os
 import torch
 import traceback
+import readline
 
 if __name__ == "__main__":
     try:
         args: dict = parse_args()
         model_path: str = args["model_path"]
         
+        ##TODO: Fix parallelism and remove this
+        args['quantize'] = True
         if args['quantize']:
             quantization_config: BitsAndBytesConfig = BitsAndBytesConfig(load_in_4bit=True)
 
@@ -23,14 +26,17 @@ if __name__ == "__main__":
         manager.initialize()
         conversation = create_chain(manager)
         history = ""
+
         while True:
             chat_input: str = input("You: ")
+            image: str = input("Image path(if vqa model being used): ")
+            prompt_input = f"prompt:{chat_input}, image:{image}"
             if chat_input.lower() == "exit":
                 torch.cuda.empty_cache()
                 args['logger'].info("Exiting chat. Received exit command.")
                 print("Exiting chat. Received exit command.")
                 break
-            response = conversation({"history": history, "input": chat_input})
+            response = conversation({"history": history, "input": prompt_input})
             print(f"Bot: {response['response']}")
             args['logger'].info(f"User: {chat_input}\nAI: {response['response']}")
             history = response['history'] + f"\nUser: {chat_input}\nAI: {response['response']}"

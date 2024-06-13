@@ -65,18 +65,21 @@ python start_chat.py --model_path "/vtti/projects06/451857/Data/Dump/ShreyasTest
 
 ## Roadmap
 - Add base inference wrapper    
-    1. Load the tokenizer for the model.
-    2. Load the model from the local model path.
-    3. Infer the device map for the model.
-    4. Dispatch the model to the specified devices in the device map.
-    5. Generate text based on the given chat.
-    6. Test with deepseek : https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct
-    7. Find a to use the quamtized coderstral/codellamma models
-    8. Post issue for code-gemma
-    9. Test with code-gemma : https://huggingface.co/google/codegemma-1.1-7b-it
-    10. codestral hf space: https://huggingface.co/spaces/poscye/code
-    11. check why not distributing across GPUS
-    12. Since ditribution fails unable to infer with out `--quantize`
+    1. Load the tokenizer for the model. -Done
+    2. Load the model from the local model path. -Done
+    3. Infer the device map for the model. -Done
+    4. Dispatch the model to the specified devices in the device map. -Done
+    5. Generate text based on the given chat. -Done
+    6. Test with deepseek : https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct -Done
+    7. Find a to use the quamtized coderstral/codellamma models - NA
+    8. Post issue for code-gemma -Done
+    9. Test with code-gemma : https://huggingface.co/google/codegemma-1.1-7b-it -Done
+    10. codestral hf space: https://huggingface.co/spaces/poscye/code - Pending
+    11. check why not distributing across GPUS - Pending
+    12. Since ditribution fails unable to infer with out `--quantize` - Pending
+    13. Paligemma basic integration - Done
+    14. Test paligemma in chat more rigourously - In progress
+    15. Test model stacking ideas
 - Add support for training/finetuning
 - Add support for models openAI, gemini eventually. 
 - Use langchain to build chat bot

@@ -105,14 +105,7 @@ python single_model_demo.py --model_path "/vtti/projects06/451857/Data/Dump/Shre
 ## License
 For open source projects, say how it is licensed.
 
-## Project status
-* Docker built 
-* tested models 
-* intergrated history/context based chat using langchain
-* chatbot works for coding with 2 models
-
-
-## Roadmap
+## Project status And roadmap
 - Add base inference wrapper    
     1. Load the tokenizer for the model. -Done
     2. Load the model from the local model path. -Done

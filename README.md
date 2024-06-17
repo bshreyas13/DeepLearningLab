@@ -157,7 +157,7 @@ url = {https://github.com/meta-llama/llama3/blob/main/MODEL_CARD.md}
 ```
 2. Google Paligemma 
 ```
-@article{paligemmamdoelcard,
+@article{paligemmamodelcard,
 
 title={Paligemma-3b-pt-334},
 

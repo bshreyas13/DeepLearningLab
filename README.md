@@ -5,30 +5,42 @@ You will need to clone the HF repo for any model of interest currently.
 
 ## Supported Models
 
-* DeepSeek 
-* code-gemma 
-* Codestral : Test Pending
-
+## Supported Models
+For supported models please refer to the [supported_models.json](./llmLab/supported_models.json) file.
 
 ## Quick Start From Docker Image
-
-* Pull docker image from registry 
-```bash
-docker pull docker pull <Updated link>
-```
-```bash
-docker run -e HF_TOKEN=XXXXX -it --rm -p 9999:8888 --user=12764:10001 -v $(pwd):/opt/app -v /vtti:/vtti --gpus all --shm-size=60G hfdocker:latest
-```
 
 * Step 1: Clone the repository to local machine or cluster compute node.
 ```bash
 git clone git@github.com:bshreyas13/codeGen.git
 ```
+
 * Step 2: cd to downloaded repository.
 ```bash
 cd codeGen
 ```
-* Step 3: Build the docker image using Dockerfile. 
+
+* Step3a: Pull docker image from registry 
+```bash
+docker pull bshreyas13/huggingface_docker:latest
+```
+```bash
+docker run -e HF_TOKEN=XXXXX -it --rm -p 9999:8888 --user=12764:10001 -v $(pwd):/opt/app -v /vtti:/vtti --gpus all --shm-size=60G hfdocker:latest
+```
+## NOTE: Generating Hugging Face Token
+To generate a Hugging Face token(`HF_TOKEN`), follow these steps:
+
+1. Go to the Hugging Face website (https://huggingface.co/).
+2. Sign in to your account or create a new one if you don't have an account.
+3. Once you are signed in, click on your profile picture in the top right corner and select "setting" from the dropdown menu. Then "Access Token" on the left of the screen.
+4. On the Token page, click on the "New token" button.
+5. Enter a name for your token (e.g., "My Token") and click on the "Create" button.
+6. Your token will be generated and displayed on the Token page. Make sure to copy and securely store your token as it will be required for authentication when using Hugging Face APIs or services.
+
+That's it! You have successfully generated a Hugging Face token. Remember to keep your token confidential and avoid sharing it with others.
+
+
+* Step 3b: If yoou already pulled the image ignore the following steps to build the docker image using Dockerfile. 
 ```bash
 docker build -e HF_TOKEN=XXX -f Dockerfile -t hfcodegen .
 ```
@@ -56,47 +68,27 @@ ssh -N -f -L 9999:localhost:9999 host@server.xyz
 ```
 
 ## Usage
-
+Once in the docker continer terminal use the `start_chat.py` script to start chatting with model specified by `model_path`
 Example:
 ```bash
-python start_chat.py --model_path "/vtti/projects06/451857/Data/Dump/ShreyasTest/codegemma-1.1-7b-it" --quantize --log_path "./LOGS"
+python start_chat.py --model_path "/vtti/projects06/451857/Data/Dump/ShreyasTest/Meta-Llama-3-8B-Instruct" --quantize --log_path "./LOGS"
 ```
 **NOTE** : currently requires `--quantize` flag.
 
-## Roadmap
-- Add base inference wrapper    
-    1. Load the tokenizer for the model. -Done
-    2. Load the model from the local model path. -Done
-    3. Infer the device map for the model. -Done
-    4. Dispatch the model to the specified devices in the device map. -Done
-    5. Generate text based on the given chat. -Done
-    6. Test with deepseek : https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct -Done
-    7. Find a to use the quamtized coderstral/codellamma models - NA
-    8. Post issue for code-gemma -Done
-    9. Test with code-gemma : https://huggingface.co/google/codegemma-1.1-7b-it -Done
-    10. codestral hf space: https://huggingface.co/spaces/poscye/code - Pending
-    11. check why not distributing across GPUS - Pending
-    12. Since ditribution fails unable to infer with out `--quantize` - Pending
-    13. Paligemma basic integration - Done
-    14. Test paligemma in chat more rigourously - In progress
-    15. Test model stacking ideas
-- Add support for training/finetuning
-- Add support for models openAI, gemini eventually. 
-- Use langchain to build chat bot
-- Build/Add similar framework for Vision language models
-- Automate repo cloning
 
 ## Authors and acknowledgment
 
 **Author**:
+
+* Name: Shreyas Bhat
+* Email: sbhat@vtti.vt.edu
+
 * Name: Sarang Joshi
 * Email: sarang87@vt.edu
 
 * Name : 
 * Email :
 
-* Name: Shreyas Bhat
-* Email: sbhat@vtti.vt.edu
 
 **Maintainers**
 
@@ -120,6 +112,60 @@ For open source projects, say how it is licensed.
 * chatbot works for coding with 2 models
 
 
+## Roadmap
+- Add base inference wrapper    
+    1. Load the tokenizer for the model. -Done
+    2. Load the model from the local model path. -Done
+    3. Infer the device map for the model. -Done
+    4. Dispatch the model to the specified devices in the device map. -Done
+    5. Generate text based on the given chat. -Done
+    6. Test with deepseek : https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct -Done
+    7. Find a to use the quamtized coderstral/codellamma models - NA
+    8. Post issue for code-gemma -Done
+    9. Test with code-gemma : https://huggingface.co/google/codegemma-1.1-7b-it -Done
+    10. codestral hf space: https://huggingface.co/spaces/poscye/code - Pending
+    11. check why not distributing across GPUS - Pending
+    12. Since ditribution fails unable to infer with out `--quantize` - Pending
+    13. Paligemma langchain integration - Done
+    14. Test paligemma in chat more rigourously - In progress
+    15. Test model stacking ideas - In progress
+    16. Added LLama3 for chat capability - Done
+- Add support for object detectors - test with DETR, pending
+- Add support for training/finetuning
+- Add support for API calls openAI, gemini - In progress 
+- Use langchain to build chat bot - done
+- Build/Add similar framework for Vision language models - Itegrated and basic testing complete.
+- Automate repo cloning - Pending
+- Basic 1 document RAG project - Future work
 
 # Citation
 
+1. Meta AI Llama3
+```
+@article{llama3modelcard,
+
+title={Llama 3 Model Card},
+
+author={AI@Meta},
+
+year={2024},
+
+url = {https://github.com/meta-llama/llama3/blob/main/MODEL_CARD.md}
+
+}
+
+```
+2. Google Paligemma 
+```
+@article{paligemmamdoelcard,
+
+title={Paligemma-3b-pt-334},
+
+author={Google},
+
+year={2024},
+
+url = {https://huggingface.co/google/paligemma-3b-pt-224}
+
+}
+```

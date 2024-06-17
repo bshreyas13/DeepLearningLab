@@ -17,6 +17,7 @@ import torch
 from llmLab.loaders import *
 import os
 import logging
+import json
 
 # Updated ModelManager class
 class ModelManager:
@@ -38,9 +39,14 @@ class ModelManager:
 
     def initialize(self) -> None:
         model: str = os.path.basename(self.model_path)
+        s_models = json.load(open('llmLab/supported_models.json'))
+        
+        if model not in s_models.keys():
+            raise ValueError(f"Unsupported model, got: {model}. Choose between {s_models.keys()}")
+        
         if model == "codegemma-1.1-7b-it":
             self.loader = CodeGemmaLoader(self.model_path, self.dtype, self.quantization_config)
-        if model == "Meta-Llama-3-8B-Instruct":
+        elif model == "Meta-Llama-3-8B-Instruct":
             self.loader = Llama3Loader(self.model_path, self.dtype, self.quantization_config)
         elif model == "deepseek-coder-6.7b-instruct":
             self.loader = DeepSeekLoader(self.model_path, self.dtype, self.quantization_config)
@@ -48,10 +54,8 @@ class ModelManager:
             self.loader = CodestralLoader(self.model_path, self.dtype, self.quantization_config)
         elif model == "paligemma-3b-mix-448":
             self.loader = PaliGemmaLoader(self.model_path, self.dtype, self.quantization_config)
-        else:
-            raise ValueError(f"Unsupported model, got: {model}. Choose between {['codegemma-1.1-7b-it', 'deepseek-coder-6.7b-instruct', 'Codestral-22B-v0.1']}")
+        
         self.logger.info(f"Loading tokenizer and model for model: {model}")
-        self.loader.load_tokenizer()
         self.loader.load_model()
         self.logger.info(f"Model loaded successfully")
 

@@ -2,7 +2,7 @@
     {
         "name": "--model_path",
         "options": {
-            "default": "/vtti/projects06/451857/Data/Dump/ShreyasTest/Meta-Llama-3-8B-Instruct",
+            "default": "/vtti/projects06/451857/Data/Dump/ShreyasTest/paligemma-3b-mix-448",
             "help": "Point model path , either local clone or remote path of higging face repo"
         }
     },

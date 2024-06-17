@@ -71,9 +71,9 @@ ssh -N -f -L 9999:localhost:9999 host@server.xyz
 Once in the docker continer terminal use the `start_chat.py` script to start chatting with model specified by `model_path`
 Example:
 ```bash
-python start_chat.py --model_path "/vtti/projects06/451857/Data/Dump/ShreyasTest/Meta-Llama-3-8B-Instruct" --quantize --log_path "./LOGS"
+python single_model_demo.py --model_path "/vtti/projects06/451857/Data/Dump/ShreyasTest/Meta-Llama-3-8B-Instruct" --quantize --log_path "./LOGS"
 ```
-**NOTE** : currently requires `--quantize` flag.
+**NOTE** : currently requires `--quantize` flag, Large model inference optimizations in progress.
 
 
 ## Authors and acknowledgment

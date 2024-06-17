@@ -12,12 +12,12 @@ For supported models please refer to the [supported_models.json](./llmLab/suppor
 
 * Step 1: Clone the repository to local machine or cluster compute node.
 ```bash
-git clone git@github.com:bshreyas13/codeGen.git
+git clone git@github.com:bshreyas13/DeepLearningLab.git
 ```
 
 * Step 2: cd to downloaded repository.
 ```bash
-cd codeGen
+cd DeepLearningLab
 ```
 
 * Step3a: Pull docker image from registry 

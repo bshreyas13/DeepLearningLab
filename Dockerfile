@@ -4,6 +4,12 @@ FROM huggingface/transformers-pytorch-gpu:latest
 # Copy the requirements.txt file into the container
 COPY requirements.txt .
 
+# Define a build argument
+ARG HF_TOKEN
+
+# Use the build argument to set an environment variable
+ENV HF_TOKEN=${HF_TOKEN}
+
 # Install required dependencies
 RUN apt-get update && apt-get install -y \
     software-properties-common \

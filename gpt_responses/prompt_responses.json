@@ -1,0 +1,62 @@
+[
+  {
+    "id": "N/A",
+    "model": "gpt-3.5-turbo",
+    "choices": [
+      {
+        "message": {
+          "content": "What happens when promises are broken,\nIn JavaScript, a bug has awoken.\nThe code may not fulfill its fate,\nBut fear not, for a hint awaits.\n\nRiddle hint:\nWhen chaining promises, don't forget,\nTo return the next promise set."
+        }
+      }
+    ],
+    "usage": {
+      "total_tokens": "N/A"
+    },
+    "prompt": "Try to generate different example each time.Ask a question about the concept of promises in javascript with a piece of code with a bug in it. Provide the hint in a poetic riddle form."
+  },
+  {
+    "id": "N/A",
+    "model": "gpt-3.5-turbo",
+    "choices": [
+      {
+        "message": {
+          "content": "Here is an example of a common but complicated memory leak in Python:\n\n```python\n# Creating a memory leak by not properly de-referencing objects\n\nclass Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None\n\n# Creating a linked list with a memory leak\nhead = Node(1)\ncurrent = head\n\nfor i in range(2, 1000000):\n    current.next = Node(i)\n    current = current.next\n\n# This linked list will consume a lot of memory as the objects are not properly de-referenced\n```\n\nMemory leaks can occur when objects are not properly de-referenced, leading to a buildup of unused memory that is not being released back to the system. In this example, a linked list is created without properly de-referencing the nodes, causing a memory leak as each node continues to reference the next node without being released."
+        }
+      }
+    ],
+    "usage": {
+      "total_tokens": "N/A"
+    },
+    "prompt": "Try to generate different examples of code and poem each time.Create a program with an example of a common but complicated memory leak in python."
+  },
+  {
+    "id": "N/A",
+    "model": "gpt-3.5-turbo",
+    "choices": [
+      {
+        "message": {
+          "content": "In a forest of nodes, a tree so grand,\nTo delete a node, you must understand.\nTraverse left and right, with care and might,\nUntil the node to delete is in sight.\n\nBut beware, dear coder, of a tricky plight,\nA bug may lurk in the dead of night.\nCheck for the smallest child, oh so sly,\nFor it may hold the key to your reply.\n\nIn Python code, let your logic flow,\nDelete the node, but beware the woe.\nFor in the depths of this binary tree,\nA bug may hide, waiting to flee.\n\nSo test your code, with caution and grace,\nAnd conquer the bug that hides its face.\nDelete the node, with errors few,\nAnd may your code be forever true. \n\n```python\nclass Node:\n    def __init__(self, key):\n        self.left = None\n        self.right = None\n        self.val = key\n\ndef deleteNode(root, key):\n    if root is None:\n        return root\n\n    if key < root.val:\n        root.left = deleteNode(root.left, key)\n    elif key > root.val:\n        root.right = deleteNode(root.right, key)\n    else:\n        if root.left is None:\n            temp = root.right\n            root = None\n            return temp\n        elif root.right is None:\n            temp = root.left\n            root = None\n            return temp\n\n        temp = minValueNode(root.right)\n        root.val = temp.val\n        root.right = deleteNode(root.right, temp.val)\n\n    return root\n\ndef minValueNode(node):\n    current = node\n\n    while current.left is not None:\n        current = current.left\n\n    return current\n\n# Create a binary search tree\nroot = Node(50)\nroot.left = Node(30)\nroot.right = Node(70)\nroot.left.left = Node(20)\nroot.left.right = Node(40)\nroot.right.left = Node(60)\nroot.right.right = Node(80)\n\ndeleteNode(root, 30)\n```"
+        }
+      }
+    ],
+    "usage": {
+      "total_tokens": "N/A"
+    },
+    "prompt": "Generate a program to delete a node in a binary search tree in python with an error. Provide the hint in a poetic riddle"
+  },
+  {
+    "id": "N/A",
+    "model": "gpt-3.5-turbo",
+    "choices": [
+      {
+        "message": {
+          "content": "Sure! Here is an example program in Python that demonstrates how to use yield and generators:\n\n```python\ndef fibonacci_generator(n):\n    a, b = 0, 1\n    count = 0\n    while count < n:\n        yield a\n        a, b = b, a + b\n        count += 1\n\n# Using the fibonacci_generator to generate the first 10 Fibonacci numbers\nfib_sequence = fibonacci_generator(10)\nfor num in fib_sequence:\n    print(num)\n```\n\nOutput:\n```\n0\n1\n1\n2\n3\n5\n8\n13\n21\n34\n```\n\nIn this program, the `fibonacci_generator` function is a generator that yields the Fibonacci sequence up to the specified number `n`. The `yield` keyword is used to return values one by one without terminating the function. When the generator is called using a loop, it generates the Fibonacci sequence up to the given number."
+        }
+      }
+    ],
+    "usage": {
+      "total_tokens": "N/A"
+    },
+    "prompt": "Create a program to demonstrate how yeild and generators can be used in python with an example and output/"
+  }
+]

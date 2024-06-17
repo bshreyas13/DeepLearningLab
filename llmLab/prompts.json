@@ -1,0 +1,34 @@
+{
+  "prompts": [
+    {
+      "prompt": "Try to generate different example each time.Ask a question about the concept of promises in javascript with a piece of code with a bug in it. Provide the hint in a poetic riddle form."
+    },
+    {
+      "prompt": "Try to generate different examples of code and poem each time.Create a program with an example of a common but complicated memory leak in python."
+    },
+    {
+      "prompt": "Generate a program to delete a node in a binary search tree in python with an error. Provide the hint in a poetic riddle"
+    },
+    {
+      "prompt": "Create a program to demonstrate how yeild and generators can be used in python with an example and output/"
+    },
+    {
+      "prompt": "Create a JavaScript program that mistakenly uses a global variable. Offer a riddle as a hint to find this scope-related bug."
+    },
+    {
+      "prompt": "Write a Python script with an infinite loop. Present a poetic hint about the cause of the endless repetition."
+    },
+    {
+      "prompt": "Design a C++ program with a pointer mismanagement bug. Provide a cryptic poem that hints at the dangling pointer issue."
+    },
+    {
+      "prompt": "Create a Java program with a concurrency issue. Offer a poetic riddle hinting at the race condition in the code."
+    },
+    {
+      "prompt": "Compose a Python program that improperly handles exceptions. Provide a poem as a hint to the overlooked error handling."
+    },
+    {
+      "prompt": "Write a Ruby script that has a bug related to variable shadowing. Give a poetic hint to uncover the shadowed variable."
+    }
+  ]
+}

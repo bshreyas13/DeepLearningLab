@@ -47,7 +47,7 @@ class ModelLoader(ABC):
 
 class Llama3Loader(ModelLoader):
     """
-    A model loader for the CodeGemma model.
+    A model loader for the Llama3 model.
     """
 
     def __init__(self, model_path: str, dtype: torch.dtype, quantization_config: dict):
@@ -57,14 +57,14 @@ class Llama3Loader(ModelLoader):
 
     def load_tokenizer(self) -> None:
         """
-        Loads the tokenizer for the CodeGemma model.
+        Loads the tokenizer for the Llama3 model.
         """
         self.tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct")
 
     @auto_model_loader
     def load_model(self) -> None:
         """
-        Loads the model for the CodeGemma model.
+        Loads the model for the Llama3 model.
         """
         pass
 

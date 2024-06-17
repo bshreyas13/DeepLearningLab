@@ -13,3 +13,4 @@ triton
 huggingface_hub  
 langchain
 langchain_community
+openai

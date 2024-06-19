@@ -74,6 +74,11 @@ def create_chain(model_manager: ModelManager):
         template="{history}\nuser: {input}\nassistant:",
     )
     llm = CustomHuggingFaceLLM(model_manager=model_manager)
+    ## Comment out conversation chain related coce
+    ## Check need for conversation memory
+    ## Replace with runnable
+    ## return runnable / conversation , esesentially something than carries the chat like a chatbot
+    
     memory = ConversationBufferMemory()  # or use ConversationSummaryMemory(llm=llm)
     conversation = ConversationChain(llm=llm, prompt=prompt_template, memory=memory)
     return conversation

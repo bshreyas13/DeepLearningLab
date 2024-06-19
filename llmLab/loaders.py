@@ -25,13 +25,6 @@ class ModelLoader(ABC):
     """
 
     @abstractmethod
-    def load_tokenizer(self) -> None:
-        """
-        Abstract method to load the tokenizer.
-        """
-        pass
-
-    @abstractmethod
     def load_model(self) -> None:
         """
         Abstract method to load the model.
@@ -54,12 +47,16 @@ class Llama3Loader(ModelLoader):
         self.model_path = model_path
         self.dtype = dtype
         self.quantization_config = quantization_config
+<<<<<<< HEAD
 
     def load_tokenizer(self) -> None:
         """
         Loads the tokenizer for the Llama3 model.
         """
         self.tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct")
+=======
+    
+>>>>>>> dev
 
     @auto_model_loader
     def load_model(self) -> None:
@@ -90,12 +87,6 @@ class CodeGemmaLoader(ModelLoader):
         self.model_path = model_path
         self.dtype = dtype
         self.quantization_config = quantization_config
-
-    def load_tokenizer(self) -> None:
-        """
-        Loads the tokenizer for the CodeGemma model.
-        """
-        self.tokenizer = GemmaTokenizer.from_pretrained("google/codegemma-1.1-7b-it")
     
     @auto_model_loader
     def load_model(self) -> None:
@@ -126,12 +117,6 @@ class DeepSeekLoader(ModelLoader):
         self.model_path = model_path
         self.dtype = dtype
         self.quantization_config = quantization_config
-
-    def load_tokenizer(self) -> None:
-        """
-        Loads the tokenizer for the DeepSeek model.
-        """
-        self.tokenizer = AutoTokenizer.from_pretrained("deepseek-ai/deepseek-coder-6.7b-instruct", trust_remote_code=True)
     
     @auto_model_loader
     def load_model(self) -> None:
@@ -163,19 +148,13 @@ class CodestralLoader(ModelLoader):
         self.dtype = dtype
         self.quantization_config = quantization_config
 
-    def load_tokenizer(self) -> None:
-        """
-        Loads the tokenizer for the Codestral model.
-        """
-        self.tokenizer = AutoTokenizer.from_pretrained("mistralai/codestral-22B-v0.1", trust_remote_code=True)
-
     @auto_model_loader
     def load_model(self) -> None:
         """
         Loads the model for the Codestral model.
         """
         pass
-    
+
     @generate_text_decorator
     def generate_text(self, chat: list) -> str:
         """
@@ -198,19 +177,12 @@ class PaliGemmaLoader(ModelLoader):
         self.model_path = model_path
         self.dtype = dtype
         self.quantization_config = quantization_config
-        
-        
-    def load_tokenizer(self) -> None:
-        """
-        Loads the tokenizer for the PaliGemma model.
-        """
-        # self.tokenizer = AutoTokenizer.from_pretrained("google/paligemma-1.1-7b-it")
-        self.processor = AutoProcessor.from_pretrained(self.model_path)
 
     def load_model(self) -> None:
         """
         Loads the model for the PaliGemma model.
         """
+        self.processor = AutoProcessor.from_pretrained(self.model_path)
         torch.cuda.empty_cache()
         if self.quantization_config is not None:
             with torch.no_grad():

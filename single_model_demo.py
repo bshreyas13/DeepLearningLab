@@ -29,18 +29,22 @@ if __name__ == "__main__":
 
         while True:
             chat_input: str = input("You: ")
-            image: str = input("Image path(if vqa model being used): ")
-            prompt_input = f"prompt:{chat_input}, image:{image}"
             if chat_input.lower() == "exit":
                 torch.cuda.empty_cache()
-                args['logger'].info("Exiting chat. Received exit command.")
+                args['logger'].info("Received exit command.Exiting chat.")
                 print("Exiting chat. Received exit command.")
                 break
+            image: str = input("Image path(if vqa model being used): ")
+            prompt_input = f"prompt:{chat_input}, image:{image}"
             response = conversation({"history": history, "input": prompt_input})
             print(f"Bot: {response['response']}")
             args['logger'].info(f"User: {chat_input}\nAI: {response['response']}")
+            ## TODO: Generalize a spohisticated hsitory management system
             history = response['history'] + f"\nUser: {chat_input}\nAI: {response['response']}"
-        
+
+            if 'detect' in chat_input.lower():
+                pass
+            
     except Exception as e:
         torch.cuda.empty_cache()
         args['logger'].error(traceback.format_exc())

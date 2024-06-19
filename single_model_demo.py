@@ -39,6 +39,7 @@ if __name__ == "__main__":
             response = conversation({"history": history, "input": prompt_input})
             print(f"Bot: {response['response']}")
             args['logger'].info(f"User: {chat_input}\nAI: {response['response']}")
+            ## TODO: Generalize a spohisticated hsitory management system
             history = response['history'] + f"\nUser: {chat_input}\nAI: {response['response']}"
 
             if 'detect' in chat_input.lower():

@@ -130,6 +130,7 @@ For open source projects, say how it is licensed.
 - Build/Add similar framework for Vision language models - Itegrated and basic testing complete.
 - Automate repo cloning - Pending
 - Basic 1 document RAG project - Future work
+- Generalize a spohisticated hsitory management system
 
 # Citation
 

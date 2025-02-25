@@ -1,0 +1,23 @@
+[
+    {
+        "name": "--model_path",
+        "options": {
+            "default": "/vtti/projects06/451857/Data/Dump/ShreyasTest/paligemma-3b-mix-448",
+            "help": "Point model path , either local clone or remote path of higging face repo"
+        }
+    },
+    {
+        "name": "--quantize",
+        "options": {
+            "action": "store_true",
+            "help": "Flag to choose quantization ON or OFF. If ON uses config to load 4bit model"
+        }
+    },
+    {
+        "name": "--log-path",
+        "options": {
+            "default": "./LOGS",
+            "help": "Path to save output logs into a file."
+        }   
+    }
+]

@@ -1,0 +1,7 @@
+{
+    "codegemma-1.1-7b-it": "google/codegemma-1.1-7b-it",
+    "Meta-Llama-3-8B-Instruct": "meta-llama/Meta-Llama-3-8B-Instruct",
+    "deepseek-coder-6.7b-instruct": "deepseek-ai/deepseek-coder-6.7b-instruct",
+    "Codestral-22B-v0.1": "mistralai/Codestral-22B-v0.1",
+    "paligemma-3b-mix-448": "google/paligemma-3b-mix-448"
+}
